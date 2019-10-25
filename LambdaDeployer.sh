@@ -1,5 +1,7 @@
 #!/bin/bash
 
+##Deploys to Lambda.
+
 AWS_profiles=(profile1 profile2 profile3 etc)
 region="us-east-1"
 RETENTION="14"
