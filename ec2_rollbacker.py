@@ -1,5 +1,9 @@
 import boto3
 
+##Ability to restore from snapshots alot faster. This script DOESNT restore multiple instances, 
+##but this script can be ran in parallel with other instances of this script in order to restore 
+##multiple instances
+
 def getSnapshotsList(client, instance):
     snapshotInfo = []
     print("Retrieving Snapshots")
