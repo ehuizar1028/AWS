@@ -16,7 +16,7 @@ do
       desc=$OPTARG
       ;;
 		c)
-      client=$OPTARG
+      AWS_PROFILE=$OPTARG
       ;;
 		g)
 			groupID=$OPTARG
@@ -30,7 +30,7 @@ do
 			echo "-t = TO port                   -- OPTIONAL: if not included, then TO = FROM"
 			echo "-i = Path to ip list           -- REQUIRED"
 			#echo "-d = Description               -- OPTIONAL"
-			echo "-c = Client Name (4 Letter ID) -- REQUIRED"
+			echo "-c = AWS PROFILE (4 Letter ID) -- REQUIRED"
 			echo "-g = Security Group ID         -- REQUIRED"
 			echo "-r = REGION                    -- OPTIONAL: If not included, then region = us-east-1"
 			exit 1
@@ -59,7 +59,7 @@ fi
 desc="TICK $ticketNumber - $comments - Added By $USER ON $(date +%F)"
 echo "DESCRIPTION: "
 echo "$desc"
-if [ -z "$from" ] || [ -z "$ips" ] || [ -z "$client" ] || [ -z "$groupID" ]; then
+if [ -z "$from" ] || [ -z "$ips" ] || [ -z "$AWS_PROFILE" ] || [ -z "$groupID" ]; then
 	echo "Not Enough Options. Type -h for help"
 	exit 1
 fi
@@ -67,7 +67,7 @@ for i in $ips;
    do
    echo "Adding Ingress Rule for IP: $i"
    aws \
-   --profile $client \
+   --profile $AWS_PROFILE \
    --region $region\
    ec2 authorize-security-group-ingress \
    --group-id $groupID \
