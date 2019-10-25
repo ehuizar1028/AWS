@@ -1,6 +1,8 @@
 import boto3
 import sys, json, os
 
+#This check is implemented in Lambda. Checks if there are any OutOfService instances and the count of instances in a given LoadBalancer
+
 def getLB(lbName, lbType):
     if lbType == "elb":
         elb = boto3.client("elb")
