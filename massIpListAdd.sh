@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#This script allows to add IP addresses to an AWS Security Group stored in an excel file. Really useful for adding a handful of
+#IPs 
+
 while getopts "f:t:i:c:g:r:h" OPTION
 do
 	case $OPTION in
@@ -48,15 +51,13 @@ fi
 if [ -z $region ]; then
 	$region="us-east-1"
 fi
-echo "Enter a Ticket Number: "
-read ticketNumber
 echo "Enter Meaningful Comments: "
 read comments
-if [[ "$ticketNumber" == "" ]] || [[ "$comments" == "" ]]; then
-  echo "Comments and associated Ticket Number are required. If there is no associated ticket, please create a ticket for this change in Fresh Service (or Jira)"
+if [[ "$comments" == "" ]]; then
+  echo "Comments are required. If there is no associated ticket"
   exit 1
 fi
-desc="TICK $ticketNumber - $comments - Added By $USER ON $(date +%F)"
+desc="$comments - Added By $USER ON $(date +%F)"
 echo "DESCRIPTION: "
 echo "$desc"
 if [ -z "$from" ] || [ -z "$ips" ] || [ -z "$AWS_PROFILE" ] || [ -z "$groupID" ]; then
