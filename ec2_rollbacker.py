@@ -108,11 +108,11 @@ def volumeActions(client, instanceID, volumeFromSnapshot_ID):
     )
 
 def main():
-    ctmsp_client = input("Select a PROFILE in the AWS Config: ")
+    client = input("Select a PROFILE in the AWS Config: ")
     region = ""
     if region == "":
         region = "us-east-1"
-    session = boto3.Session(profile_name=ctmsp_client, region_name=region)
+    session = boto3.Session(profile_name=client, region_name=region)
     client = session.client('ec2')
     listOfInstnaces = getInstances(client)
     for l in listOfInstnaces:
